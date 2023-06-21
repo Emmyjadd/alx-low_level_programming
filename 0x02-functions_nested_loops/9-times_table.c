@@ -9,30 +9,30 @@ void times_table(void)
 
 	for (i = 0; i <= 9; i++)
 	{
-		_putchar('0'); /* Print the first digit (always 0) */
-		_putchar(','); /* Print the comma separator */
-
-		for (j = 1; j <= 9; j++)
+		for (j = 0; j <= 9; j++)
 		{
 			result = i * j;
 
-			/* Print the space separator */
-			if (result <= 9)
+			if (j == 0)
+			{
+				_putchar(result + '0');
+			}
+			else if (result < 10)
+			{
+				_putchar(',');
 				_putchar(' ');
+				_putchar(' ');
+				_putchar(result + '0');
+			}
 			else
-				_putchar(result / 10 + '0');
-
-			_putchar(result % 10 + '0'); /* Print the second digit */
-			_putchar(','); /* Print the comma separator */
-			_putchar(' '); /* Print the space separator */
+			{
+				_putchar(',');
+				_putchar(' ');
+				_putchar((result / 10) + '0');
+				_putchar((result % 10) + '0');
+			}
 		}
-
-		/* Print the last digit of the row */
-		result = i * j;
-		_putchar(result / 10 + '0');
-		_putchar(result % 10 + '0');
-
-		_putchar('\n'); /* Move to the next line */
+		_putchar('\n');
 	}
 }
 
