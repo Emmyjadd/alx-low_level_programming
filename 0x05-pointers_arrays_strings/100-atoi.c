@@ -18,10 +18,6 @@ int _atoi(char *s)
 		sign = -1;
 		i++;
 	}
-	else if (s[i] == '+')
-	{
-		i++;
-	}
 
 	/* Convert string to integer */
 	while (s[i] != '\0')
@@ -33,19 +29,22 @@ int _atoi(char *s)
 			/* Check for integer overflow */
 			if ((sign == 1 && result < 0) || (sign == -1 && result > 0))
 			{
-				result = 0;
+				/* Adjust result for INT_MIN */
+				if (sign == -1 && result > 0)
+					result = -result;
+
 				break;
 			}
 		}
-		else
+		else if (result != 0)
 		{
-			/* Stop conversion if non-digit character is encountered */
+			/* Stop conversion if non-digit character is encountered after digits */
 			break;
 		}
 
 		i++;
 	}
 
-	return (result * sign);
+	return (result);
 }
 
